@@ -4,7 +4,7 @@ iBundle is an "improved" Bundles manager for the Laravel PHP framework. iBundle 
 
 - **Author:** Neo Ighodaro
 - **Website:** [http://github.com/CreativityKills/iBundle](http://github.com/CreativityKills/iBundle)
-- **Version:** 1.0.0
+- **Version:** 1.1.0
 
 ## Copyright and License
 iBundle was written by Neo Ighodaro (CreativityKills, LLC) for the Laravel framework.
@@ -14,8 +14,24 @@ Copyright 2012 CreativityKills, LLC
 
 ## Changelog
 
-### iBundle 1.0
+### iBundle 1.1.0
+- Added a few configuration file items.
+- Depreciated ibundle::initialize in favor of a more understandable ibundle::track
+- Rewrote the task classes. Tasks are now called using IoC containers.
+
+### iBundle 1.0.0
 - Initial release.
+
+## Terminology
+
+### Installing
+Installing an ibundle simply means iBundle uses Laravel to fetch bundles, then starts tracking it by moving/copying the bundle to the ibundle directory and adding its tracking file to the bundles root directory.
+
+### Tracking / Untracking
+When bundles are tracked it means that its can be worked on by iBundle. It can be activated / deactivated etc. Untracked bundles are not recognized as iBundle bundles and thus cannot be activated by iBundle.
+
+### Activating / Deactivating
+When a bundle is acivated in iBundle, its simply registered. Its the equivalent of adding it to your <code>application/bundles.php</code> file. When its deactivated, its the equivalent of removing it from your <code>application/bundles.php file</code>. When iBundles are activated, depending on their auto (load) setting which can be found in the <code>ibundle.json</code> file, the Bundle could be started. This is the equivalent of adding a bundle to <code>application/bundles.php</code> with the auto config set to true.
 
 ## Documentation
 
@@ -31,9 +47,9 @@ or by downloading the zip from Github and unzipping it in your bundles directory
 After installing the bundle, you can now activate the bundle in your applications/bundles.php
 
 <code>
-return array(
-	'ibundle' => array('auto' => true),
-);
+	return array(
+		'ibundle' => array('auto' => true),
+	);
 </code>.
 
 Its a good idea to use iBundle to manage all your bundles, and thus it will be better to remove all the already listed bundles in the application/bundles.php file. Later, we will see how to start tracking bundles that are not being tracked by iBundle.
@@ -51,11 +67,7 @@ Installing a bundle with iBundle is simple, all you have to do is run artisan:
 	$ php artisan ibundle::install bundle_name true
 </code>
 
- to activate the Bundle on the fly. You can also optionally set the auto and handles parameter by adding a third and fourth argument. The auto parameter has to be a boolean and the fourth is for bundle routes.
-
-<code>
-	$ php artisan ibundle::install bundle_name true true handles
-</code>
+ to activate the Bundle on the fly.
 
 ### Activating an iBundle
 After an iBundle is being tracked by iBundle, you can activate the bundle (activating the bundle means the bundle will be registered with Bundle::register and if the ibundle config is set to auto then it will be started). To activate a bundle on artisan CLI use:
@@ -91,7 +103,9 @@ You can see the list of activated iBundles by using:
 Sometimes you have already started using some bundles but you want to track it using iBundle. Then you can:
 
 <code>
-	$ php artisan ibundle::initialize bundle_name
+	// You can optionally add a second parameter, this will be set as the "handles" setting
+	// its useful if you require routes for the bundle to work
+	$ php artisan ibundle::track bundle_name
 </code>
 
 That code looks for the bundle in the default bundles directory, and attempts to start tracking it.
