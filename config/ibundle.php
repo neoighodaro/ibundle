@@ -15,5 +15,5 @@ return array(
 	/**
 	 * File name of the cache file, used by iBundle file driver.
 	 */
-	'file'	=> Bundle::path('ibundle').'storage/ibundle_activated.php.serialized',
+	'file'	=> IBUNDLE_ROOT.'storage/ibundle_activated.php.serialized',
 );

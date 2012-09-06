@@ -12,6 +12,8 @@
  * @copyright 2012 CreativityKills, LLC
  */
 
+// Bundle root
+define('IBUNDLE_ROOT', __DIR__.DIRECTORY_SEPARATOR);
 
 /*
 |----------------------------------------------------------------------------------------------
@@ -56,6 +58,7 @@ function ibundle_config($key, $value = '')
 {
 	if ($value !== '')
 	{
+		// Set a config key value
 		with(new iBundle\Config)->set($key, $value);
 	}
 
