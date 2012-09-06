@@ -35,8 +35,13 @@ Autoloader::namespaces(array(
 	'iBundle'		=> IBUNDLE_ROOT.'libraries/ibundle',
 ));
 
-// Load the artisan dependencies
+
+/**
+ * Load the artisan tasks dependencies.
+ */
+
 require IBUNDLE_ROOT.'tasks/dependencies.php';
+
 
 /*
 |----------------------------------------------------------------------------------------------
