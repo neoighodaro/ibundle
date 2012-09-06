@@ -26,13 +26,17 @@ define('IBUNDLE_ROOT', __DIR__.DIRECTORY_SEPARATOR);
  */
 
 Autoloader::map(array(
-	'iBundle'	=> __DIR__.'/libraries/ibundle.php',
+	'iBundle'		=> IBUNDLE_ROOT.'libraries/ibundle.php',
+	'Ibundle_Base_Task'	=> IBUNDLE_ROOT.'tasks/base.php',
+	'iBundle\\Tasks\\Main'	=> IBUNDLE_ROOT.'tasks/main.php',
 ));
 
 Autoloader::namespaces(array(
-	'iBundle'	=> __DIR__.'/libraries/ibundle',
+	'iBundle'		=> IBUNDLE_ROOT.'libraries/ibundle',
 ));
 
+// Load the artisan dependencies
+require IBUNDLE_ROOT.'tasks/dependencies.php';
 
 /*
 |----------------------------------------------------------------------------------------------
