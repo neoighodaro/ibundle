@@ -10,10 +10,22 @@
  * @package  iBundle
  * @link      http://github.com/CreativityKills/iBundle
  * @copyright 2012 CreativityKills, LLC
+ * @version   1.1.0
  */
 
-// Bundle root
+/*
+|----------------------------------------------------------------------------------------------
+| Bundle Document Root
+|----------------------------------------------------------------------------------------------
+|
+| This is defined for use throughout the Bundle. This is used instead of Laravel's
+| Bundle::path('ibundle') so as to allow flexibility, so users can define the ibundle bundles
+| name.
+|
+ */
+
 define('IBUNDLE_ROOT', __DIR__.DIRECTORY_SEPARATOR);
+
 
 /*
 |----------------------------------------------------------------------------------------------
@@ -36,8 +48,16 @@ Autoloader::namespaces(array(
 ));
 
 
-/**
- * Load the artisan tasks dependencies.
+/*
+|----------------------------------------------------------------------------------------------
+| Load task dependencies
+|----------------------------------------------------------------------------------------------
+|
+| In v1.0 each task had a class of its own, its harder to maintain like that
+| in v1.1.0 and above, tasks are called using the IoC container. Each artisan command has its
+| unique identity that is always being looked for before each command is run,
+| iBundle takes advantage of this to allow a flexible test class with injected dependency.
+|
  */
 
 require IBUNDLE_ROOT.'tasks/dependencies.php';

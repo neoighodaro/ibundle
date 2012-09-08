@@ -50,9 +50,9 @@ IoC::register('task: ibundle::activated', function() use ($dependency)
 	return new Ibundle_Base_Task($dependency, 'activated');
 });
 
-// Initialize: Depreciated in 2.0!
+// Initialize: Depreciated in 1.1.0!
 IoC::register('task: ibundle::initialize', function()
 {
-	echo('NOTE: This method is depreciated, use ibundle::track instead.'.PHP_EOL.PHP_EOL);
+	echo('NOTE: This method is depreciated, use the "ibundle::track" command instead.'.PHP_EOL.PHP_EOL);
 	return IoC::resolve('task: ibundle::track');
 });

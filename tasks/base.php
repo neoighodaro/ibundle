@@ -24,7 +24,7 @@ class Ibundle_Base_Task extends Task {
 	 */
 	public function __construct($dependency, $action)
 	{
-		$this->_action = $action;
+		$this->_action     = $action;
 		$this->_dependency = $dependency;
 	}
 
@@ -36,24 +36,13 @@ class Ibundle_Base_Task extends Task {
 	 */
 	public function run($arguments = array())
 	{
-		// If no arguments were passed to the task, we will just migrate
-		// to the latest version across all bundles. Otherwise, we will
-		// parse the arguments to determine the bundle for which the
-		// database migrations should be run.
-		if (empty($this->_action))
+		if( ! empty($this->_action) and method_exists($this->_dependency, $this->_action))
 		{
-			throw new Exception('Sorry, iBundle cant find that method!');
+			$this->_dependency->{$this->_action}($arguments);
 		}
 		else
 		{
-			if(method_exists($this->_dependency, $this->_action))
-			{
-				$this->_dependency->{$this->_action}($arguments);
-			}
-			else
-			{
-				throw new Exception("Sorry iBundle could not figure out what you were trying to do.");
-			}
+			static::error('Sorry, iBundle cant find that method!');
 		}
 	}
 
