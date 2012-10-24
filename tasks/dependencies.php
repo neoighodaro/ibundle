@@ -14,6 +14,12 @@ IoC::register('task: ibundle::install', function() use ($dependency)
 	return new Ibundle_Base_Task($dependency, 'install');
 });
 
+// Migrate
+IoC::register('task: ibundle::migrate', function() use ($dependency)
+{
+    return new Ibundle_Base_Task($dependency, 'migrate');
+});
+
 // Activate
 IoC::register('task: ibundle::activate', function() use ($dependency)
 {
