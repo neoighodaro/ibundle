@@ -43,6 +43,29 @@ class Main {
 	}
 
 	/**
+	 * Migrate an installed bundle.
+	 *
+	 * <code>
+	 * 	$ php artisan ibundle::migrate bundle
+	 * </code>
+	 *
+	 * @param  array  $arguments
+	 * @return  null
+	 */
+	public function migrate($arguments = array())
+	{
+		$bundle = array_get($arguments, 0);
+
+		if ($bundle === false or empty($bundle))
+		{
+			Ibundle_Base_Task::error('Invalid iBundle name.');
+		}
+
+		// Laravel do your thing.
+		Command::run(array('migrate', $bundle));
+	}
+
+	/**
 	 * Activate a tracked bundle.
 	 *
 	 * <code>
